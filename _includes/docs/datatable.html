@@ -1,0 +1,56 @@
+<h2 id="data-table"><a href="#data-table"><i class="fa fa-link" aria-hidden="true"></i></a> Data table</h2>
+		<p>Component para usar em tabelas, permitindo as funções de filtro, organização, live search entre outras</p>
+
+		<img src="http://i.imgur.com/mjZEEWv.gif" alt="Demonstração do data table">
+
+		<h3>HTML</h3>
+		<p>Exemplo de código base</p>
+
+		<pre><code><xmp><div class="table-responsive">
+    <div id="data-table-basic_wrapper" class="dataTables_wrapper">
+        <table id="data-table-basic" class="table table-striped dataTable" role="grid" aria-describedby="data-table-basic_info">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Local</th>
+                    <th>Idade</th>
+                    <th>Data inicial</th>
+                    <th>Salário</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Local</th>
+                    <th>Idade</th>
+                    <th>Data inicial</th>
+                    <th>Salário</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>61</td>
+                    <td>2011/04/25</td>
+                    <td>$320,800</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div></xmp></code></pre>
+
+		<h3>CSS</h3>
+		<p>Inclua os arquivos de css no header após o carregamento de todo o tema</p>
+		<pre><code><xmp><link rel="stylesheet" href="Resources/public/js/components/data-table.min.js"></xmp></code></pre>
+
+		<h3>Jquery</h3>
+		<p>Inclua os arquivos de JS no final da página após o jquery</p>
+		<pre><code><xmp><link rel="stylesheet" href="Resources/public/js/components/data-table.min.js"></xmp></code></pre>
+		<p>Inicie o plugin depois da inclusão do JS</p>
+		<pre><code><xmp>$(document).ready(function() {
+    $('#data-table-basic').DataTable(); 
+}</xmp></code></pre>
