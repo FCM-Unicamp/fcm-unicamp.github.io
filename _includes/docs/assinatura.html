@@ -22,8 +22,8 @@ A função dela é preencher a maioria das informações do usuário, sem a nece
 
 $signature = new FooSignature($user);
 
-$signature->setTituloPt($cargo)
-    ->setTituloEn($cargo)
+$signature->setTituloPt('Programador web')
+    ->setTituloEn('Web programmer')
     ->generateHtmlSignature()
     ->minifyHtml();
 
