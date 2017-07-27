@@ -1,0 +1,96 @@
+<h2 id="exemplo"><a href="#data-table"><i class="fa fa-link" aria-hidden="true"></i></a> Exemplo</h2>
+		<p>Classe para gerar assinaturas de email</p>
+
+		<img src="http://i.imgur.com/VNhN6zt.gif" alt="Demonstração do data table">
+
+<h2 id="criando"><a href="#utilizando"><i class="fa fa-link" aria-hidden="true"></i></a> Criando a assinatura</h2>
+
+<h3>Step 1</h3>
+<p>Crie uma classe da sua assinatura personalizada, para isso, duplique uma assinatura ja existente, por exemplo:</p>
+<pre><code><xmp>mv /src/FENF/AssinaturaBundle/Utils/FenfSignature.php /src/FENF/AssinaturaBundle/Utils/FooSignature.php
+</xmp></code></pre>
+<p>Depois de criada, personalize sua assinatura do jeito que quiser (veja mais informações para personalizar a classe no próximo tópico)</p>
+
+<h3>Step 2</h3>
+<p>No controller que ira usar a assinatura, adicionei o namespace</p>
+<pre><code><xmp>use FENF\AssinaturaBundle\Utils\FooSignature;</xmp></code></pre>
+
+<p>Instancie a FooSignature</p>
+<blockquote>A variavel <strong>$user</strong> é opcional. <br>
+A função dela é preencher a maioria das informações do usuário, sem a necessidade de usar os setters.</blockquote>
+<pre><code><xmp>$user = $this->get('security.context')->getToken()->getUser();
+
+$signature = new FooSignature($user);
+
+$signature->setTituloPt($cargo)
+    ->setTituloEn($cargo)
+    ->generateHtmlSignature()
+    ->minifyHtml();
+
+$template = $signature->getTemplate();</xmp></code></pre>
+
+<p><strong>Pronto!</strong> o seu template de assinatura já está na variavel <strong>$template</strong>.</p>
+
+<h2 id="twig"><a href="#twig"><i class="fa fa-link" aria-hidden="true"></i></a> Utilizando a assinatura com o Twig</h2>
+
+<h3>Step 1</h3>
+<p>Passe a variavel com a assinatura para o twig renderizar</p>
+<pre><code><xmp>//Considerando o exemplo anterior
+return $this->render('AssinaturaBundle:Assinatura:assinatura.html.twig', array(
+    'signature' => $template,
+));
+</xmp></code></pre>
+
+<h3>Step 2</h3>
+<p>Para mostrar a assinatura no twig em sua <strong>"forma HTML"</strong></p>
+<pre><code><xmp>{% raw %}{{ signature|raw }}{% endraw %}</xmp></code></pre>
+<h5>Exemplo:</h5>
+<img src="http://i.imgur.com/CymvkHV.png" alt="Exemplo de assinatura">
+
+<br><br>
+
+<p>Para mostrar a assinatura no twig em sua <strong>"forma String"</strong></p>
+<pre><code><xmp>{% raw %}{{ signature }}{% endraw %}</xmp></code></pre>
+<h5>Exemplo:</h5>
+<pre><code><xmp><div id="sig-container" style="margin-top: 15px;padding-top: 6px; border-top: 1px dashed #ddd;"> 
+<div style="float: left; margin: 2px 5px 5px 0px; padding-right: 5px; display: block;" id="phot
+oWrapper"><img src="http://i.imgur.com/SGbDIVI.png" style="margin-bottom: 20px" id="sigPhoto">
+ </div> <div style="margin-top:0px; margin-left: 74px;" id="sigDetailsWrapper"> <p style="font-
+ family: Helvetica, sans-serif;font-size: 12px; line-height: 14px; color: #333; margin-top:0; m
+ argin-bottom: 4px; padding-left:0;"> <strong><span id="sigName">Joao Pedro Mantovani</span></s
+ trong> <br> <span class="cargo_pt">Programador web</span> <span id="sigMobile"></span> <br> <s
+ pan>+55 (19) 3521-8828</span> <span id="sigMobile"></span> -<a href="www.fenf.unicamp.br" id="
+ sigWebsite" style="color:#428BCA;" rel="nofollow">www.fenf.unicamp.br</a> <br> </p> <p style="
+ font-family: Helvetica, sans-serif; font-size: 12px; line-height: 14px; color: #333; margin-to
+ p:0; margin-left:0; padding-left:0;"> <strong>Faculdade de Enfermagem</strong> <span id="sigAd
+ dress"style="font-size: 10px; line-height: 14px; margin: 0px 0; display:block; opacity:0.8;">R
+ ua Tessália Vieira de Camargo, 126 - 13083-887 </span> <span id="sigAddress" style="font-size:
+  10px; line-height: 14px;margin: 0px 0; display:block; opacity:0.8;">Cidade Universitária - Ca
+  mpinas/SP </span> </p> </div></div><div style="clear: left"></xmp></code></pre>
+
+
+
+<h2 id="personalizando"><a href="#personalizando"><i class="fa fa-link" aria-hidden="true"></i></a> Personalizando a assinatura</h2>
+<p>Na sua classe custom</p>
+<pre><code><xmp>/src/FENF/AssinaturaBundle/Utils/FooInterface.php</xmp></code></pre>
+
+
+<p>Modifique as funções:</p>
+<pre><code><xmp>generateHtmlSignature()
+englishSignature()</xmp></code></pre>
+<p>Para adequar as suas necessidades/desejos</p>
+
+
+<h2 id="classe"><a href="#classe"><i class="fa fa-link" aria-hidden="true"></i></a> Classe, herança e interface</h2>
+<p>A classe utiliza os três métodos, exemplo:</p>
+<pre><code><xmp>class FenfSignature extends EmailSignature implements SignatureInterface</xmp></code></pre>
+
+<h3>Classe principal (pai)</h3>
+<p>Responsável por gerar a estrutura da assinatura</p>
+<pre><code><xmp>/src/FENF/AssinaturaBundle/Utils/EmailSignature.php</xmp></code></pre>
+
+<h3>Class custom (filha)</h3>
+<pre><code><xmp>/src/FENF/AssinaturaBundle/Utils/FooInterface.php</xmp></code></pre>
+
+<h3>Interface</h3>
+<pre><code><xmp>/src/FENF/AssinaturaBundle/Utils/SignatureInterface.php</xmp></code></pre>
